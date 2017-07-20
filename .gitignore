@@ -6,7 +6,6 @@
 /.haml-lint.yml
 /.overcommit.yml
 /.reek
-/.rspec
 /.rubocop.yml
 /.yardoc
 /coffeelint.json

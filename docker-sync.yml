@@ -1,6 +1,6 @@
 version: '2'
 syncs:
-  users_code:
+  useradmin_code:
     src: .
     sync_userid: 1000
     sync_groupid: 1000

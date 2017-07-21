@@ -29,5 +29,6 @@ module UserAdmin
     config.generators.system_tests = nil
 
     config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_name_prefix = "user_admin_#{Rails.env}"
   end
 end

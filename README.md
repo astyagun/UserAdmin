@@ -13,8 +13,6 @@ Estimation: 16h - 32h
       * RSpec
       * Capybara
       * Factory girl
-    * 30m Bootstrap
-  * 2h Admin can list, view, destroy, edit and create normal users
   * 30m Generate User model
     * role (default: 'user')
     * email
@@ -23,6 +21,8 @@ Estimation: 16h - 32h
     * small biography
     * profile picture (optional)
   * 30m Add validations and a factory for User model
+  * 30m Install Bootstrap
+  * 2h Admin can list, view, destroy, edit and create normal users
   * Seed admin
   * Authentication
     * 2h Registration

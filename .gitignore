@@ -11,6 +11,7 @@
 /coffeelint.json
 /config/database.yml
 /config/settings.local.yml
+/spec/vim_formatter.rb
 
 # IDE projects
 *.swo

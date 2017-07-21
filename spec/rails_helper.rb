@@ -12,4 +12,5 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.filter_rails_from_backtrace!
   config.include FactoryGirl::Syntax::Methods
+  config.include AuthenticationHelperMethods
 end

@@ -2,10 +2,20 @@
 %html
   %head
     %meta{:content => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}/
+    %meta{charset: "utf-8"}/
+    %meta{content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport"}/
+
     %title UserAdmin
+
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = flash_messages
-    = yield
+    = render 'header'
+    .row
+      .col-sm-10.mx-auto.mt-2
+        = render 'flash_messages'
+    .content
+      .row
+        .col-sm-8.mx-auto.mt-4
+          = yield

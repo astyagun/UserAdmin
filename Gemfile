@@ -8,8 +8,10 @@ gem 'rails', '~> 5.1.2'
 gem 'sidekiq', '~> 5.0'
 
 # Font end
+gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'coffee-rails', '~> 4.2'
 gem 'haml-rails', '~> 1.0'
+gem 'jquery-rails', '~> 4.3'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'

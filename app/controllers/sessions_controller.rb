@@ -1,12 +1,14 @@
 class SessionsController < ApplicationController
-  def new; end
+  def new
+    redirect_to logged_in_redirect_path(current_user) if user_logged_in?
+  end
 
   def create
     result = Authentication::Check.call session_params
 
     if result.success?
       session[:user_id] = result.user.id
-      redirect_to create_success_redirect_path(result), notice: t('.success')
+      redirect_to logged_in_redirect_path(result.user), notice: t('.success')
     else
       flash.now.alert = result.message
       render :new
@@ -24,7 +26,7 @@ class SessionsController < ApplicationController
     params.require(:session).permit(:email, :password)
   end
 
-  def create_success_redirect_path(result)
-    result.user.admin? ? admin_users_path : home_path
+  def logged_in_redirect_path(user)
+    user.admin? ? admin_users_path : home_path
   end
 end

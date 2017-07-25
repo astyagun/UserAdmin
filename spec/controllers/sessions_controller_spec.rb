@@ -1,6 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
+  describe '#new' do
+    subject { get :new }
+
+    it { is_expected.to render_template :new }
+
+    context 'when user is already logged in' do
+      before { session[:user_id] = user.id }
+      let(:role) { 'user' }
+      let(:user) { create :user, role: role }
+
+      it { is_expected.to redirect_to home_path }
+
+      context 'and user role is admin' do
+        let(:role) { 'admin' }
+
+        it { is_expected.to redirect_to admin_users_path }
+      end
+    end
+  end
+
   describe '#create' do
     before { allow(Authentication::Check).to receive(:call).and_return(authentication_check_result) }
     let(:authentication_check_result) { double success?: true, user: user }

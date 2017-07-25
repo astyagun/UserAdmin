@@ -2,8 +2,15 @@ en:
   application_name: User Admin
   application:
     header:
+      register: Register
       log_in: Log in
       log_out: Log out
+  users:
+    new:
+      title: Register
+    create:
+      success: Registration was successful
+      failure: Error performing registration
   sessions:
     new:
       title: Log in

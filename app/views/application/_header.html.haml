@@ -1,10 +1,12 @@
 %nav.navbar.navbar-toggleable-xl.navbar-light.bg-faded
-  = link_to t('application_name'), root_path, class: 'navbar=brand'
+  = link_to t('application_name'), root_path, class: 'navbar-brand'
 
   %ul.navbar-nav.ml-auto
     - if user_logged_in?
       %li.nav-item
-        = link_to t('.log_out'), session_path, method: :delete
+        = link_to t('.log_out'), session_path, method: :delete, class: 'nav-link'
     - else
       %li.nav-item
-        = link_to t('.log_in'), new_session_path
+        = link_to t('.log_in'), new_session_path, class: 'nav-link'
+      %li.nav-item
+        = link_to t('.register'), new_user_path, class: 'nav-link'

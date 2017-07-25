@@ -1,13 +1,24 @@
 en:
   application_name: User Admin
+  application:
+    header:
+      log_in: Log in
+      log_out: Log out
   sessions:
+    new:
+      title: Log in
     create:
       success: Logged in successfully
-  interactors:
-    authentication:
-      check:
-        failure: Incorrect email or password
+    destroy:
+      success: Logged out successfully
+  homes:
+    show:
+      title: Welcome!
   admin:
     users:
       index:
         title: Admin Dashboard
+  interactors:
+    authentication:
+      check:
+        failure: Incorrect email or password

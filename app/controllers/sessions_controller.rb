@@ -8,9 +8,14 @@ class SessionsController < ApplicationController
       session[:user_id] = result.user.id
       redirect_to create_success_redirect_path(result), notice: t('.success')
     else
-      flash.now.alert = result.error
+      flash.now.alert = result.message
       render :new
     end
+  end
+
+  def destroy
+    session.delete :user_id
+    redirect_to new_session_path, notice: t('.success')
   end
 
   private

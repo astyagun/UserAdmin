@@ -38,7 +38,7 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     context 'when authentication is unsuccessful' do
-      before { allow(authentication_check_result).to receive_messages(success?: false, error: 'Error') }
+      before { allow(authentication_check_result).to receive_messages(success?: false, message: 'Error') }
 
       it 'does not change session[:user_id]' do
         expect { subject }.not_to change { session[:user_id] }.from(nil)
@@ -50,6 +50,36 @@ RSpec.describe SessionsController, type: :controller do
 
       it 'renders the same template' do
         expect(subject).to render_template :new
+      end
+    end
+  end
+
+  describe '#destroy' do
+    before { session[:user_id] = user.id }
+    let(:user) { create :user }
+    subject { delete :destroy }
+
+    it 'clears session[:user_id]' do
+      expect { subject }.to change { session[:user_id] }.from(user.id).to(nil)
+    end
+
+    it { is_expected.to redirect_to new_session_path }
+
+    it 'sets flash message' do
+      expect { subject }.to change { flash.notice }.from(nil).to('Logged out successfully')
+    end
+
+    context 'when user is not logged in' do
+      before { session.delete :user_id }
+
+      it 'clears session[:user_id]' do
+        expect { subject }.not_to change { session[:user_id] }.from(nil)
+      end
+
+      it { is_expected.to redirect_to new_session_path }
+
+      it 'sets flash message' do
+        expect { subject }.to change { flash.notice }.from(nil).to('Logged out successfully')
       end
     end
   end

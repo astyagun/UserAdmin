@@ -1,7 +1,5 @@
 module Admin
   class UsersController < ApplicationController
-    def index
-      flash.now.notice = 'Test'
-    end
+    def index; end
   end
 end

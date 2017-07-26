@@ -1,6 +1,7 @@
 # Local configuration
 /*/.env
 /*/config/database.yml
+/*/config/secrets.yml.key
 /*/config/settings.local.yml
 /.env
 /.haml-lint.yml
@@ -10,8 +11,8 @@
 /.yardoc
 /coffeelint.json
 /config/database.yml
+/config/secrets.yml.key
 /config/settings.local.yml
-/spec/vim_formatter.rb
 
 # IDE projects
 *.swo

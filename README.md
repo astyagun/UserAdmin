@@ -30,16 +30,19 @@ Estimation: 16h - 32h
   * Seed admin
   * 2h Admin can list, view, destroy, edit and create normal users
   * 1h Authorization
-* * *
   * 3h Create PDF
   * 1h Send PDF by Email (should be possible to send it to [development@taskwunder.com](mailto:development@taskwunder.com) when needed)
+* * *
   * 3h Profile picture upload and display
 
 # Development
 
+* Use [Docker environment](https://github.com/astyagun/docker-rails-development)
+* Use encrypted secrets (`dt rails secrets:edit`) to change `AdminMailer` configuration
+
 TODO
 
-https://github.com/astyagun/docker-rails-development
+Overwrite
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

@@ -5,7 +5,7 @@ RSpec.describe 'Authentication', type: :feature do
     let(:user_attributes) { attributes_for :user }
     subject do
       visit root_path
-      within('.navbar') { click_link 'Register' }
+      within('.navbar') { click_on 'Register' }
 
       fill_in 'Email', with: user_attributes[:email]
       fill_in 'Password', with: user_attributes[:password], match: :prefer_exact
@@ -13,7 +13,7 @@ RSpec.describe 'Authentication', type: :feature do
       fill_in 'Full name', with: user_attributes[:full_name]
       fill_in 'Birth date', with: user_attributes[:birth_date]
       fill_in 'Small biography', with: user_attributes[:small_biography]
-      click_button 'Register'
+      within('.content') { click_on 'Register' }
     end
 
     it 'registers user' do
@@ -47,7 +47,7 @@ RSpec.describe 'Authentication', type: :feature do
         expect(page).to have_content 'Logged in successfully'
         within('h1') { expect(page).to have_content 'Users' }
 
-        within('.navigation') { click_link 'Log out' }
+        within('.navigation') { click_on 'Log out' }
 
         expect(page).to have_content 'Logged out successfully'
         within('h1') { expect(page).to have_content 'Log in' }
@@ -61,12 +61,12 @@ RSpec.describe 'Authentication', type: :feature do
         visit new_session_path
         fill_in 'Email', with: user.email
         fill_in 'Password', with: user.password
-        click_button 'Log in'
+        within('.content') { click_on 'Log in' }
 
         expect(page).to have_content 'Logged in successfully'
         expect(page).to have_content 'Welcome'
 
-        within('.navbar') { click_link 'Log out' }
+        within('.navbar') { click_on 'Log out' }
 
         expect(page).to have_content 'Logged out successfully'
         within('h1') { expect(page).to have_content 'Log in' }
@@ -77,7 +77,7 @@ RSpec.describe 'Authentication', type: :feature do
           visit new_session_path
           fill_in 'Email', with: user.email + '123'
           fill_in 'Password', with: user.password
-          click_button 'Log in'
+          within('.content') { click_on 'Log in' }
 
           expect(page).to have_content 'Incorrect email or password'
         end

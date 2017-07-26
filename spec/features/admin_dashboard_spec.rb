@@ -1,9 +1,10 @@
 require 'rails_helper'
 
+# rubocop:disable RSpec/ExampleLength, RSpec/MultipleExpectations
 RSpec.describe 'Admin Dashboard', type: :feature do
   let(:admin) { create :user, :admin }
 
-  specify 'Allows listing, viewing, editing and deleting users' do
+  it 'allows listing, viewing, editing and deleting users' do
     log_in admin
 
     # Index
@@ -16,7 +17,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
 
     # Create
     user_attributes = attributes_for :user
-    click_link 'New user'
+    click_on 'New user'
 
     select user_attributes[:role], from: 'Role'
     fill_in 'Email',                 with: user_attributes[:email]
@@ -26,7 +27,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
     fill_in 'Birth date',            with: user_attributes[:birth_date]
     fill_in 'Small biography',       with: user_attributes[:small_biography]
 
-    click_button 'Create User'
+    click_on 'Create User'
 
     # Show
     within('h1') { expect(page).to have_content 'Show User #' }
@@ -37,19 +38,50 @@ RSpec.describe 'Admin Dashboard', type: :feature do
     expect(page).to have_content user_attributes[:small_biography]
 
     # Edit
-    click_link 'Edit User #'
+    click_on 'Edit User #'
 
     new_biography = "#{user_attributes[:small_biography]} True story."
     fill_in 'Small biography', with: new_biography
-    click_button 'Update User'
+    click_on 'Update User'
 
     expect(page).to have_content new_biography
 
     # Index
 
-    within('.navigation') { click_link 'Users' }
+    within('.navigation') { click_on 'Users' }
     expect(page).to have_content user_attributes[:role]
     expect(page).to have_content user_attributes[:email]
     expect(page).to have_content user_attributes[:full_name]
+  end
+
+  it 'allows to send a PDF with user details' do
+    user = create :user
+
+    log_in admin
+
+    click_on user.email
+    perform_enqueued_jobs do
+      expect do
+        click_on 'Send user details by email'
+        expect(page).to have_content 'Email delivery was scheduled successfully'
+      end.to change(ActionMailer::Base.deliveries, :count).by 1
+    end
+
+    # Check Email
+    email = ActionMailer::Base.deliveries.last
+
+    expect(email.subject).to eq "User Admin: details of user ##{user.id}"
+    expect(email.to).to eq ['recipient@example.com']
+
+    pdf = PDF::Inspector::Text.analyze(email.attachments['User Admin - User details.pdf'].read).
+      strings.join(' ')
+
+    expect(pdf).to have_content user.id
+    expect(pdf).to have_content user.email
+    expect(pdf).to have_content user.role
+    expect(pdf).to have_content user.full_name
+    expect(pdf).to have_content I18n.l(user.birth_date, format: :long)
+    expect(pdf).to have_content user.small_biography
+    # expect(pdf).to have_content user.avatar
   end
 end

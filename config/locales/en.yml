@@ -24,6 +24,16 @@ en:
   homes:
     show:
       title: Welcome!
+  details_deliveries:
+    create:
+      success: Email delivery was scheduled successfully
+  admin_mailer:
+    user_details:
+      subject: '%{application_name}: details of user #%{id}'
+  admin:
+    users:
+      show:
+        send_user_details_by_email: Send user details by email
   interactors:
     authentication:
       check:

@@ -39,4 +39,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.active_job.queue_adapter = :test
+
+  # Speeds up tests (rarely use log from tests anyway)
+  config.log_level = :fatal
 end

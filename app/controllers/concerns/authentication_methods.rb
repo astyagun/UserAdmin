@@ -1,4 +1,4 @@
-module AuthenticationControllerMethods
+module AuthenticationMethods
   extend ActiveSupport::Concern
 
   LoggedInUserNotFound = Class.new StandardError

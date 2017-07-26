@@ -17,6 +17,7 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
 # Code organization
+gem 'administrate', '~> 0.8.1'
 gem 'interactor-rails', '~> 2.1'
 gem 'simple_form', '~> 3.5'
 

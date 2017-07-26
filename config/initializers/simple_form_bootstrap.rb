@@ -1,10 +1,10 @@
 # Use this setup block to configure all options available in SimpleForm.
-SimpleForm.setup do |config|
+SimpleForm.setup do |config| # rubocop:disable Metrics/BlockLength
   config.error_notification_class = 'alert alert-danger'
-  config.button_class = 'btn btn-primary mt-3 float-right'
+  config.button_class = 'btn btn-primary mt-3'
   config.boolean_label_class = nil
 
-  config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'has-danger' do |b|
+  config.wrappers :vertical_form, tag: 'div', class: 'form-group row', error_class: 'has-danger' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -19,7 +19,7 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: {tag: 'p', class: 'form-control-feedback'}
   end
 
-  config.wrappers :vertical_file_input, tag: 'div', class: 'form-group', error_class: 'has-danger' do |b|
+  config.wrappers :vertical_file_input, tag: 'div', class: 'form-group row', error_class: 'has-danger' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -32,7 +32,7 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: {tag: 'p', class: 'form-control-feedback'}
   end
 
-  config.wrappers :vertical_boolean, tag: 'div', class: 'form-group', error_class: 'has-danger' do |b|
+  config.wrappers :vertical_boolean, tag: 'div', class: 'form-group row', error_class: 'has-danger' do |b|
     b.use :html5
     b.optional :readonly
 
@@ -44,7 +44,12 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: {tag: 'p', class: 'form-control-feedback'}
   end
 
-  config.wrappers :vertical_radio_and_checkboxes, tag: 'div', class: 'form-group', error_class: 'has-danger' do |b|
+  config.wrappers(
+    :vertical_radio_and_checkboxes,
+    tag: 'div',
+    class: 'form-group row',
+    error_class: 'has-danger'
+  ) do |b|
     b.use :html5
     b.optional :readonly
     b.use :label, class: 'form-control-label'
@@ -53,7 +58,7 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: {tag: 'p', class: 'form-control-feedback'}
   end
 
-  config.wrappers :horizontal_form, tag: 'div', class: 'form-group', error_class: 'has-danger' do |b|
+  config.wrappers :horizontal_form, tag: 'div', class: 'form-group row', error_class: 'has-danger' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -61,7 +66,7 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'col-sm-3 form-control-label'
+    b.use :label, class: 'col-sm-3 col-form-label'
 
     b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
       ba.use :input, class: 'form-control'
@@ -70,7 +75,12 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :horizontal_file_input, tag: 'div', class: 'form-group', error_class: 'has-danger' do |b|
+  config.wrappers(
+    :horizontal_file_input,
+    tag: 'div',
+    class: 'form-group row',
+    error_class: 'has-danger'
+  ) do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -85,7 +95,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :horizontal_boolean, tag: 'div', class: 'form-group', error_class: 'has-danger' do |b|
+  config.wrappers :horizontal_boolean, tag: 'div', class: 'form-group row', error_class: 'has-danger' do |b|
     b.use :html5
     b.optional :readonly
 
@@ -99,7 +109,12 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :horizontal_radio_and_checkboxes, tag: 'div', class: 'form-group', error_class: 'has-danger' do |b|
+  config.wrappers(
+    :horizontal_radio_and_checkboxes,
+    tag: 'div',
+    class: 'form-group row',
+    error_class: 'has-danger'
+  ) do |b|
     b.use :html5
     b.optional :readonly
 
@@ -112,7 +127,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :inline_form, tag: 'div', class: 'form-group', error_class: 'has-danger' do |b|
+  config.wrappers :inline_form, tag: 'div', class: 'form-group row', error_class: 'has-danger' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -127,7 +142,7 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: {tag: 'p', class: 'form-control-feedback'}
   end
 
-  config.wrappers :multi_select, tag: 'div', class: 'form-group', error_class: 'has-danger' do |b|
+  config.wrappers :multi_select, tag: 'div', class: 'form-group row', error_class: 'has-danger' do |b|
     b.use :html5
     b.optional :readonly
     b.use :label, class: 'form-control-label'
@@ -137,11 +152,12 @@ SimpleForm.setup do |config|
       ba.use :hint,  wrap_with: {tag: 'p', class: 'form-control-feedback'}
     end
   end
+
   # Wrappers for forms and inputs using the Bootstrap toolkit.
   # Check the Bootstrap docs (http://getbootstrap.com)
   # to learn about the different styles for forms and inputs,
   # buttons and other elements.
-  config.default_wrapper = :vertical_form
+  config.default_wrapper = :horizontal_form
   config.wrapper_mappings = {
     check_boxes: :vertical_radio_and_checkboxes,
     radio_buttons: :vertical_radio_and_checkboxes,

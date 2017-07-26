@@ -9,7 +9,5 @@ en:
       default_message: 'Please review the problems below:'
   helpers:
     submit:
-      user:
-        create: Register
       session:
         submit: Log in

@@ -1,7 +1,9 @@
 %h1= t('.title')
 
-.col-sm-6.mx-auto
-  = simple_form_for :session, url: session_path, html: {class: 'form-horizontal mt-4'} do |f|
+.col-sm-8.mx-auto
+  = simple_form_for :session, url: session_path, html: {class: 'mt-4'} do |f|
     = f.input :email
     = f.input :password
-    = f.button :submit
+    .row.form-group
+      .col-sm-3
+      = f.button :submit, class: 'ml-3'

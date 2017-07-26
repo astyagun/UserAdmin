@@ -5,9 +5,12 @@ en:
       register: Register
       log_in: Log in
       log_out: Log out
+    authentication_required: Please log in first
+    admin_required: Please log in as administrator to access that page
   users:
     new:
       title: Register
+      submit: Register
     create:
       success: Registration was successful
       failure: Error performing registration
@@ -21,10 +24,6 @@ en:
   homes:
     show:
       title: Welcome!
-  admin:
-    users:
-      index:
-        title: Admin Dashboard
   interactors:
     authentication:
       check:

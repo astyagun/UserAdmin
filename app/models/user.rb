@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-  validates :role, inclusion: %w[user admin]
+  ROLES = %w[user admin]
+
+  validates :role, inclusion: ROLES
   validates :email, uniqueness: true, format: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
   validates :email, :full_name, :birth_date, :small_biography, presence: true
   validates :password, length: {minimum: 8}, allow_nil: true

@@ -5,9 +5,7 @@ RSpec.describe 'Authentication', type: :feature do
     let(:user_attributes) { attributes_for :user }
     subject do
       visit root_path
-      within '.navbar' do
-        click_link 'Register'
-      end
+      within('.navbar') { click_link 'Register' }
 
       fill_in 'Email', with: user_attributes[:email]
       fill_in 'Password', with: user_attributes[:password], match: :prefer_exact
@@ -22,9 +20,7 @@ RSpec.describe 'Authentication', type: :feature do
       subject
 
       expect(page).to have_content 'Registration was successful'
-      within '.content' do
-        expect(page).to have_content 'Log in'
-      end
+      within('h1') { expect(page).to have_content 'Log in' }
     end
 
     context 'when invalid data is entered' do
@@ -34,9 +30,7 @@ RSpec.describe 'Authentication', type: :feature do
         subject
 
         expect(page).to have_content 'Error performing registration'
-        within '.content' do
-          expect(page).to have_content 'Register'
-        end
+        within('h1') { expect(page).to have_content 'Register' }
       end
     end
   end
@@ -51,16 +45,12 @@ RSpec.describe 'Authentication', type: :feature do
         log_in user
 
         expect(page).to have_content 'Logged in successfully'
-        expect(page).to have_content 'Admin Dashboard'
+        within('h1') { expect(page).to have_content 'Users' }
 
-        within '.navbar' do
-          click_link 'Log out'
-        end
+        within('.navigation') { click_link 'Log out' }
 
         expect(page).to have_content 'Logged out successfully'
-        within '.content' do
-          expect(page).to have_content 'Log in'
-        end
+        within('h1') { expect(page).to have_content 'Log in' }
       end
     end
 
@@ -76,14 +66,10 @@ RSpec.describe 'Authentication', type: :feature do
         expect(page).to have_content 'Logged in successfully'
         expect(page).to have_content 'Welcome'
 
-        within '.navbar' do
-          click_link 'Log out'
-        end
+        within('.navbar') { click_link 'Log out' }
 
         expect(page).to have_content 'Logged out successfully'
-        within '.content' do
-          expect(page).to have_content 'Log in'
-        end
+        within('h1') { expect(page).to have_content 'Log in' }
       end
 
       context 'and incorrect credentials are entered' do
@@ -95,6 +81,52 @@ RSpec.describe 'Authentication', type: :feature do
 
           expect(page).to have_content 'Incorrect email or password'
         end
+      end
+    end
+  end
+
+  describe 'visiting admin section' do
+    subject { visit admin_root_path }
+
+    context 'when user is not logged in' do
+      it 'redirects to log in page and renders a flash message' do
+        subject
+
+        expect(page).to have_content 'Please log in first'
+        within('h1') { expect(page).to have_content 'Log in' }
+      end
+    end
+
+    context 'when logged in as user' do
+      before { log_in create :user }
+
+      it 'redirects to home page and renders a flash message' do
+        subject
+
+        expect(page).to have_content 'Please log in as administrator to access that page'
+        within('h1') { expect(page).to have_content 'Welcome' }
+      end
+    end
+
+    context 'when logged in as admin' do
+      before { log_in create(:user, :admin) }
+
+      it 'renders admin section' do
+        subject
+        within('h1') { expect(page).to have_content 'Users' }
+      end
+    end
+  end
+
+  describe 'visiting home page' do
+    subject { visit home_path }
+
+    context 'when user is not logged in' do
+      it 'redirects to log in page and renders a flash message' do
+        subject
+
+        expect(page).to have_content 'Please log in first'
+        within('h1') { expect(page).to have_content 'Log in' }
       end
     end
   end

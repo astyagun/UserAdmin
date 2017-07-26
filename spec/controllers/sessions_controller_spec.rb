@@ -19,6 +19,20 @@ RSpec.describe SessionsController, type: :controller do
         it { is_expected.to redirect_to admin_users_path }
       end
     end
+
+    context 'when session has :user_id of unexistent user' do
+      before { session[:user_id] = 1 }
+
+      it 'clears session[:user_id]' do
+        expect { subject }.to change { session[:user_id] }.from(1).to(nil)
+      end
+
+      it { is_expected.to redirect_to new_session_path }
+
+      it 'sets flash message' do
+        expect { subject }.to change { flash.notice }.from(nil).to('Logged out successfully')
+      end
+    end
   end
 
   describe '#create' do

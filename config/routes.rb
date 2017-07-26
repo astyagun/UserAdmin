@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
+    root to: redirect('/admin/users', status: 302)
   end
 
   get 'home' => 'homes#show'

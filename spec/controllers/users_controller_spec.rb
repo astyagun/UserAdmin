@@ -2,41 +2,41 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   describe '#new' do
-    subject { get :new }
+    subject(:controller_action) { get :new }
 
-    it 'sets user instance variable' do
-      expect { subject }.to change { assigns(:user).class }.from(NilClass).to(User)
+    it 'sets user instance variable', :aggregate_failures do
+      expect { controller_action }.to change { assigns(:user) }.from(nil).to(an_instance_of(User))
       expect(assigns(:user)).to be_new_record
-    end
-
-    it 'sets user instance variable' do
-      expect { subject }.to change { assigns(:user) }.from(nil).to(an_instance_of(User))
     end
 
     it { is_expected.to render_template :new }
   end
 
   describe '#create' do
-    before { allow(Authentication::Register).to receive(:call).and_return(registration_result) }
-    let(:registration_result) { double success?: true }
-    let(:user) { build :user }
-    subject { post :create, params: {user: user.attributes} }
+    subject(:controller_action) { post :create, params: {user: user_attributes} }
+
+    before { allow(register_user_interactor).to receive(:call).and_return(registration_result) }
+    let(:register_user_interactor) { class_double(Authentication::RegisterUser).as_stubbed_const }
+    let(:registration_result) { instance_double Interactor::Context, success?: true }
+    let(:user_attributes) { attributes_for :user, :with_avatar }
 
     it 'sets flash notice' do
-      expect { subject }.to change { flash.notice }.from(nil).to('Registration was successful')
+      expect { controller_action }.to change { flash.notice }.from(nil).to('Registration was successful')
     end
 
     it { is_expected.to redirect_to new_session_path }
 
     context 'when failed to create user' do
-      let(:registration_result) { double success?: false, user: user }
+      let(:user) { User.new user_attributes }
+      let(:registration_result) { double success?: false, user: user } # rubocop:disable RSpec/VerifiedDoubles
 
       it 'sets user instance variable' do
-        expect { subject }.to change { assigns(:user) }.from(nil).to(user)
+        expect { controller_action }.to change { assigns(:user) }.from(nil).to(user)
       end
 
       it 'sets immediate flash alert' do
-        expect { subject }.to change { flash.now[:alert] }.from(nil).to('Error performing registration')
+        expect { controller_action }.to change { flash.now[:alert] }.
+          from(nil).to('Error performing registration')
       end
 
       it { is_expected.to render_template :new }

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Authentication::Register do
+RSpec.describe Authentication::RegisterUser do
   describe '.call' do
     let(:user_attributes) { attributes_for :user }
     subject { described_class.call user_attributes }
@@ -13,7 +13,7 @@ RSpec.describe Authentication::Register do
 
     it 'uses attributes provided' do
       subject
-      expect(User.last).to have_attributes user_attributes.except(:role, :password, :password_confirmation)
+      expect(User.last).to have_attributes user_attributes.except(:password, :password_confirmation)
     end
 
     context 'when user validation failed' do

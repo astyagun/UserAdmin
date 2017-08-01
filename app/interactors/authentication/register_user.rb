@@ -1,5 +1,5 @@
 module Authentication
-  class Register
+  class RegisterUser
     include Interactor
 
     def call

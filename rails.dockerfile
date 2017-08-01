@@ -1,8 +1,8 @@
 FROM ruby:2.4
 
-# Install NodeJS
+# Install NodeJS and ImageMagick
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends nodejs \
+  && apt-get install -y --no-install-recommends nodejs imagemagick \
   && rm -rf /var/lib/apt/lists/*
 
 RUN adduser --disabled-password --gecos "" myuser

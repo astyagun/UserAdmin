@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 # Back end
 gem 'bcrypt', '~> 3.1.7'
+gem 'carrierwave', '~> 1.1'
+gem 'mini_magick', '~> 4.8'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.2'
@@ -38,6 +40,8 @@ end
 group :development, :test do
   gem 'factory_girl_rails', '~> 4.8'
   gem 'faker', '~> 1.8'
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
   gem 'rspec-rails', '~> 3.6'
 end
 

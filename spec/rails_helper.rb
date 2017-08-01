@@ -15,4 +15,5 @@ RSpec.configure do |config|
   config.include FeatureAuthenticationHelperMethods, type: :feature
   config.include ControllerAuthenticationHelperMethods, type: :controller
   config.include ActiveJob::TestHelper, type: :feature
+  config.include CarrierWave::Test::Matchers, type: :uploader
 end

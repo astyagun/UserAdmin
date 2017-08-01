@@ -32,7 +32,6 @@ Estimation: 16h - 32h
   * 1h Authorization
   * 3h Create PDF
   * 1h Send PDF by Email (should be possible to send it to [development@taskwunder.com](mailto:development@taskwunder.com) when needed)
-* * *
   * 3h Profile picture upload and display
 
 # Development

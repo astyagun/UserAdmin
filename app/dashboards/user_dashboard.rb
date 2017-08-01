@@ -18,7 +18,7 @@ class UserDashboard < Administrate::BaseDashboard
     full_name: Field::String,
     birth_date: Field::DateTime,
     small_biography: Field::Text,
-    # avatar: Field::String,
+    avatar: CarrierwaveField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -30,6 +30,7 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    avatar
     role
     email
     full_name
@@ -38,6 +39,7 @@ class UserDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
+    avatar
     id
     role
     email
@@ -47,7 +49,6 @@ class UserDashboard < Administrate::BaseDashboard
     created_at
     updated_at
   ].freeze
-  # avatar
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
@@ -60,8 +61,8 @@ class UserDashboard < Administrate::BaseDashboard
     full_name
     birth_date
     small_biography
+    avatar
   ].freeze
-  # avatar
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.

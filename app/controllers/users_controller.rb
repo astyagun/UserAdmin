@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    result = Authentication::Register.call user_params
+    result = Authentication::RegisterUser.call user_params
 
     if result.success?
       redirect_to new_session_path, notice: t('.success')
@@ -24,7 +24,8 @@ class UsersController < ApplicationController
       :password_confirmation,
       :full_name,
       :birth_date,
-      :small_biography
+      :small_biography,
+      :avatar
     )
   end
 end

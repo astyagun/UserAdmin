@@ -37,31 +37,11 @@ Estimation: 16h - 32h
 # Development
 
 * Use [Docker environment](https://github.com/astyagun/docker-rails-development)
-* Use encrypted secrets (`dt rails secrets:edit`) to change `AdminMailer` configuration
+* Use encrypted secrets (`dt rails secrets:edit`) to change `AdminMailer` configuration. The names of keys can be seen in `config/secrets.yml`.
+* Run tests with `rspec` (assuming you have aliases described in the link to Docker environment above)
 
-TODO
+# Deployment
 
-Overwrite
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* See `docker-compose.yml` for the list of application dependencies at run time
+* Set mailer related options in secrets (preferably encrypted). The names of keys can be seen in `config/secrets.yml`.
+* Run `ADMIN_EMAIL=<email> ADMIN_PASSWORD=<password> rails seed` to generate admin user with desired credentials

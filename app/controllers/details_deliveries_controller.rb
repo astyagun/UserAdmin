@@ -1,5 +1,5 @@
 class DetailsDeliveriesController < ApplicationController
-  include AuthorizationMethods
+  include AuthorizationConcern
 
   before_action :require_admin!, :require_user!
 

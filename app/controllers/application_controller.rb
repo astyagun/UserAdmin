@@ -1,4 +1,4 @@
 class ApplicationController < ActionController::Base
-  include AuthenticationMethods
+  include AuthenticationConcern
   protect_from_forgery with: :exception
 end

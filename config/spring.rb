@@ -1,8 +1,10 @@
-%w(
-  .ruby-version
+%w[
   .rbenv-vars
-  tmp/restart.txt
-  tmp/caching-dev.txt
+  .ruby-version
+  app/middleware/authentication_middleware.rb
   config/initializers/simple_form.rb
   config/initializers/simple_form_bootstrap.rb
-).each { |path| Spring.watch(path) }
+  config/routes.rb
+  tmp/caching-dev.txt
+  tmp/restart.txt
+].each { |path| Spring.watch(path) }

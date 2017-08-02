@@ -7,7 +7,7 @@ RSpec.describe SessionsController, type: :controller do
     it { is_expected.to render_template :new }
 
     context 'when user is already logged in' do
-      before { session[:user_id] = user.id }
+      before { log_in user }
       let(:role) { 'user' }
       let(:user) { create :user, role: role }
 
@@ -21,7 +21,7 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     context 'when session has :user_id of unexistent user' do
-      before { session[:user_id] = 1 }
+      before { log_in User.new(id: 1) }
 
       it 'clears session[:user_id]' do
         expect { subject }.to change { session[:user_id] }.from(1).to(nil)
@@ -89,7 +89,7 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe '#destroy' do
-    before { session[:user_id] = user.id }
+    before { log_in user }
     let(:user) { create :user }
     subject { delete :destroy }
 
@@ -104,7 +104,7 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     context 'when user is not logged in' do
-      before { session.delete :user_id }
+      before { log_out }
 
       it 'clears session[:user_id]' do
         expect { subject }.not_to change { session[:user_id] }.from(nil)

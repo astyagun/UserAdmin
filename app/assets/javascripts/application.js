@@ -13,5 +13,20 @@
 //= require rails-ujs
 //= require turbolinks
 //= require jquery
-//= require bootstrap-sprockets
+//
+// See which files are available in Bootstrap: https://github.com/twbs/bootstrap-rubygem/blob/latest-release/assets/javascripts/bootstrap-sprockets.js
+//= require bootstrap/util
+//= require bootstrap/alert
+//
+//= require bootstrap-datepicker/core
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+  $('.form-group.user_birth_date input').datepicker({
+    'format': 'yyyy-mm-dd',
+    'autoclose': true,
+    'defaultViewDate': {'year': (new Date().getFullYear() - 20)},
+    'endDate': (new Date().getFullYear() - 5) + '-12-31',
+    'startView': 'decades'
+  });
+});

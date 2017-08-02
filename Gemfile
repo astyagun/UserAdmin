@@ -11,6 +11,7 @@ gem 'sidekiq', '~> 5.0'
 
 # Font end
 gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'bootstrap-datepicker-rails', '~> 1.6'
 gem 'coffee-rails', '~> 4.2'
 gem 'haml-rails', '~> 1.0'
 gem 'jquery-rails', '~> 4.3'

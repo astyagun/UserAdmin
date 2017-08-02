@@ -94,11 +94,11 @@ RSpec.describe 'Authentication', type: :feature do
   end
 
   describe 'visiting admin section' do
-    subject { visit admin_root_path }
+    subject(:visit_admin_section) { visit admin_root_path }
 
     context 'when user is not logged in' do
       it 'redirects to log in page and renders a flash message' do
-        subject
+        visit_admin_section
 
         expect(page).to have_content 'Please log in first'
         within('h1') { expect(page).to have_content 'Log in' }
@@ -109,7 +109,7 @@ RSpec.describe 'Authentication', type: :feature do
       before { log_in create(:user, :admin) }
 
       it 'renders admin section' do
-        subject
+        visit_admin_section
         within('h1') { expect(page).to have_content 'Users' }
       end
     end

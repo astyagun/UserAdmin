@@ -1,4 +1,4 @@
 class HomesController < ApplicationController
-  before_action :require_authentication!
+  before_action :require_authentication
   def show; end
 end

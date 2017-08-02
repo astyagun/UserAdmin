@@ -10,7 +10,6 @@ RSpec.describe 'admin_mailer/user_details', type: :view do
   let(:user) { build_stubbed :user }
   let(:rendered_images) { PDF::Inspector::XObject.analyze(rendered).page_xobjects.first }
 
-
   it 'renders user attributes and no images', :aggregate_failures do
     %i[id role email full_name small_biography].each do |attribute|
       expect(rendered_view).to have_content user[attribute]

@@ -1,3 +1,4 @@
+---
 version: '2'
 syncs:
   useradmin_code:
@@ -8,3 +9,4 @@ syncs:
       - "-ignore='Path .git'"           # Ignore the main .git repo
       - "-ignore='BelowPath .git'"      # Also ignore .git repos in subfolders such as in composer vendor dirs
       - "-ignore='Path .gitignore'"
+      - "-ignore='Path tmp/cache'"

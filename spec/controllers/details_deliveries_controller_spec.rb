@@ -28,6 +28,16 @@ RSpec.describe DetailsDeliveriesController, type: :controller do
 
     it { is_expected.to redirect_to admin_user_path inspected_user }
 
+    context 'when user is not logged in' do
+      before { log_out }
+
+      it { is_expected.to redirect_to new_session_path }
+
+      it 'sets flash alert message' do
+        expect { controller_action }.to change { flash.alert }.from(nil).to('Please log in first')
+      end
+    end
+
     context 'when user role is user' do
       let(:role) { 'user' }
 

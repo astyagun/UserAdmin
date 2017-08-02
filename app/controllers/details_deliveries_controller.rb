@@ -1,7 +1,7 @@
 class DetailsDeliveriesController < ApplicationController
   include AuthorizationConcern
 
-  before_action :require_admin!, :require_user!
+  before_action :require_authentication, :require_admin, :require_user
 
   def create
     AdminMailer.user_details(@user).deliver_later
@@ -11,7 +11,7 @@ class DetailsDeliveriesController < ApplicationController
 
   private
 
-  def require_user!
+  def require_user
     @user = User.select(:id).find(params[:user_id])
   end
 end

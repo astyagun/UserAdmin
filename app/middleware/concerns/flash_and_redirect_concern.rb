@@ -6,7 +6,7 @@ module FlashAndRedirectConcern
       ActionDispatch::Flash::FlashHash.new(alert: I18n.t(message_key)).to_session_value
   end
 
-  def redirect
-    Rack::Response.new.tap { |response| response.redirect '/' }.finish
+  def redirect_to(path)
+    Rack::Response.new.tap { |response| response.redirect path }.finish
   end
 end

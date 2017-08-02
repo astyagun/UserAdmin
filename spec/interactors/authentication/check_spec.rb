@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Authentication::Check do
   describe '.call' do
-    subject { described_class.call email: email, password: password }
+    subject(:result) { described_class.call email: email, password: password }
 
     let(:user) { create :user }
     let(:email) { user.email }
@@ -11,7 +11,7 @@ RSpec.describe Authentication::Check do
     it { is_expected.to be_success }
 
     it 'returns the user' do
-      expect(subject.user).to eq user
+      expect(result.user).to eq user
     end
 
     context 'when there is no user for email provided' do
@@ -20,7 +20,7 @@ RSpec.describe Authentication::Check do
       it { is_expected.not_to be_success }
 
       it 'returns an error message' do
-        expect(subject.message).to eq 'Incorrect email or password'
+        expect(result.message).to eq 'Incorrect email or password'
       end
     end
 
@@ -30,7 +30,7 @@ RSpec.describe Authentication::Check do
       it { is_expected.not_to be_success }
 
       it 'returns an error message' do
-        expect(subject.message).to eq 'Incorrect email or password'
+        expect(result.message).to eq 'Incorrect email or password'
       end
     end
   end

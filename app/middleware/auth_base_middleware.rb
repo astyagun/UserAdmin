@@ -3,7 +3,7 @@ class AuthBaseMiddleware
   include AuthenticationConcern
   include AuthorizationConcern
 
-  def self.before_action(method_name)
+  def self.before_action(method_name) # rubocop:disable Style/TrivialAccessors
     @before_action = method_name
   end
 

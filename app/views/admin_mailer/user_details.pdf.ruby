@@ -19,7 +19,9 @@ Prawn::Document.new do |pdf| # rubocop:disable Metrics/BlockLength
   pdf.default_leading 5
 
   line_height = pdf.font_size + pdf.default_leading
-  values_offset = pdf.width_of(User.human_attribute_name(@user.attributes.keys.max_by(&:length))) + line_height
+  values_offset =
+    pdf.width_of(User.human_attribute_name(@user.attributes.keys.max_by(&:length))) +
+    line_height
   avatar_size = 200
 
   pdf.pad(line_height) { pdf.text "#{t 'application_name'}: user details", style: :bold, size: 24 }

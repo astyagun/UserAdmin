@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe User, type: :model do
   describe 'validity' do
     subject { user.valid? }
@@ -54,16 +55,19 @@ RSpec.describe User, type: :model do
 
       context 'to nil' do
         let(:password) { '' }
+
         it { is_expected.to be false }
       end
 
       context 'to an empty string' do
         let(:password) { '' }
+
         it { is_expected.to be false }
       end
 
       context 'to a string 7 characters long' do
         let(:password) { '1234567' }
+
         it { is_expected.to be false }
       end
 

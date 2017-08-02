@@ -2,17 +2,18 @@ require 'rails_helper'
 
 RSpec.describe Authentication::RegisterUser do
   describe '.call' do
+    subject(:result) { described_class.call user_attributes }
+
     let(:user_attributes) { attributes_for :user }
-    subject { described_class.call user_attributes }
 
     it { is_expected.to be_success }
 
     it 'creates a new user' do
-      expect { subject }.to change(User, :count).by 1
+      expect { result }.to change(User, :count).by 1
     end
 
     it 'uses attributes provided' do
-      subject
+      result
       expect(User.last).to have_attributes user_attributes.except(:password, :password_confirmation)
     end
 
@@ -22,13 +23,13 @@ RSpec.describe Authentication::RegisterUser do
       it { is_expected.to be_failure }
 
       it 'does nor create a new user' do
-        expect { subject }.not_to change(User, :count)
+        expect { result }.not_to change(User, :count)
       end
 
-      it 'returns the invalid user' do
-        expect(subject.user).to be_a User
-        expect(subject.user.email).to eq user_attributes[:email]
-        expect(subject.user).to be_invalid
+      it 'returns the invalid user', :aggregate_failures do
+        expect(result.user).to be_a User
+        expect(result.user.email).to eq user_attributes[:email]
+        expect(result.user).to be_invalid
       end
     end
   end

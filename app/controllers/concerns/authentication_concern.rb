@@ -4,7 +4,7 @@ module AuthenticationConcern
   LoggedInUserNotFound = Class.new StandardError
 
   included do
-    if self.ancestors.map(&:name).include? 'ActionController::Base'
+    if ancestors.map(&:name).include? 'ActionController::Base'
       helper_method :user_logged_in?, :current_user
       rescue_from LoggedInUserNotFound, with: :log_out
     end
@@ -32,7 +32,7 @@ module AuthenticationConcern
     raise LoggedInUserNotFound, 'User saved in session was not found'
   end
 
-  def require_authentication!
+  def require_authentication
     redirect_to new_session_path, alert: t('application.authentication_required') unless user_logged_in?
   end
 

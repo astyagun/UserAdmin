@@ -19,7 +19,7 @@ Prawn::Document.new do |pdf| # rubocop:disable Metrics/BlockLength
   pdf.default_leading 5
 
   line_height = pdf.font_size + pdf.default_leading
-  values_offset = pdf.width_of 'Small biography:    '
+  values_offset = pdf.width_of(User.human_attribute_name(@user.attributes.keys.max_by(&:length))) + line_height
   avatar_size = 200
 
   pdf.pad(line_height) { pdf.text "#{t 'application_name'}: user details", style: :bold, size: 24 }
@@ -29,7 +29,7 @@ Prawn::Document.new do |pdf| # rubocop:disable Metrics/BlockLength
   pdf.move_down line_height * 2
 
   if @user.avatar?
-    pdf.text 'Avatar:', style: :bold
+    pdf.text User.human_attribute_name(:avatar), style: :bold
     pdf.image(
       @user.avatar.path,
       at: [values_offset, pdf.cursor + line_height],
@@ -38,21 +38,21 @@ Prawn::Document.new do |pdf| # rubocop:disable Metrics/BlockLength
     pdf.move_down avatar_size
   end
 
-  pdf.text 'ID:', style: :bold
+  pdf.text User.human_attribute_name(:id), style: :bold
   pdf.text_box @user.id.to_s, at: [values_offset, pdf.cursor + line_height]
 
-  pdf.text 'Role:', style: :bold
+  pdf.text User.human_attribute_name(:rolee), style: :bold
   pdf.text_box @user.role, at: [values_offset, pdf.cursor + line_height]
 
-  pdf.text 'Email:', style: :bold
+  pdf.text User.human_attribute_name(:email), style: :bold
   pdf.text_box @user.email, at: [values_offset, pdf.cursor + line_height]
 
-  pdf.text 'Full name:', style: :bold
+  pdf.text User.human_attribute_name(:full_name), style: :bold
   pdf.text_box @user.full_name, at: [values_offset, pdf.cursor + line_height]
 
-  pdf.text 'Birth date:', style: :bold
+  pdf.text User.human_attribute_name(:birth_date), style: :bold
   pdf.text_box I18n.l(@user.birth_date, format: :long), at: [values_offset, pdf.cursor + line_height]
 
-  pdf.text 'Small biography:', style: :bold
+  pdf.text User.human_attribute_name(:small_biography), style: :bold
   pdf.text_box @user.small_biography, at: [values_offset, pdf.cursor + line_height]
 end.render

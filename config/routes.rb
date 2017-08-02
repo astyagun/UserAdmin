@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root to: redirect('/session/new', status: 302)
 
@@ -12,4 +14,8 @@ Rails.application.routes.draw do
   end
 
   get 'home' => 'homes#show'
+
+  mount Sidekiq::Web => '/sidekiq'
 end
+
+ActiveSupport::Notifications.instrument 'routes_loaded.application'

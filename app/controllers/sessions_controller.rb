@@ -7,8 +7,7 @@ class SessionsController < ApplicationController
     result = Authentication::Check.call session_params
 
     if result.success?
-      session[:user_id] = result.user.id
-      redirect_to logged_in_redirect_path(result.user), notice: t('.success')
+      log_in result.user
     else
       flash.now.alert = result.message
       render :new
@@ -23,9 +22,5 @@ class SessionsController < ApplicationController
 
   def session_params
     params.require(:session).permit(:email, :password)
-  end
-
-  def logged_in_redirect_path(user)
-    user.admin? ? admin_users_path : home_path
   end
 end

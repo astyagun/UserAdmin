@@ -8,6 +8,18 @@ module AuthenticationConcern
     rescue_from LoggedInUserNotFound, with: :log_out
   end
 
+  private
+
+  def log_in(user)
+    session[:user_id] = user.id
+    redirect_to logged_in_redirect_path(user), notice: t('sessions.create.success')
+  end
+
+  def log_out
+    session.delete :user_id
+    redirect_to new_session_path, notice: t('sessions.destroy.success')
+  end
+
   def user_logged_in?
     session[:user_id].present?
   end
@@ -18,12 +30,11 @@ module AuthenticationConcern
     raise LoggedInUserNotFound, 'User saved in session was not found'
   end
 
-  def log_out
-    session.delete :user_id
-    redirect_to new_session_path, notice: t('sessions.destroy.success')
-  end
-
   def require_authentication!
     redirect_to new_session_path, alert: t('application.authentication_required') unless user_logged_in?
+  end
+
+  def logged_in_redirect_path(user)
+    user.admin? ? admin_users_path : home_path
   end
 end

@@ -18,7 +18,7 @@ RSpec.describe UsersController, type: :controller do
     before { allow(register_user_interactor).to receive(:call).and_return(registration_result) }
     let(:register_user_interactor) { class_double(Authentication::RegisterUser).as_stubbed_const }
     let(:registration_result) { instance_double Interactor::Context, success?: true }
-    let(:user_attributes) { attributes_for :user, :with_avatar }
+    let(:user_attributes) { attributes_for :user }
 
     it 'sets flash notice' do
       expect { controller_action }.to change { flash.notice }.from(nil).to('Registration was successful')

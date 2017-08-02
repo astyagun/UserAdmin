@@ -89,12 +89,12 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe '#destroy' do
-    before { log_in user }
-    let(:user) { create :user }
     subject { delete :destroy }
 
+    before { log_in User.new(id: 1) }
+
     it 'clears session[:user_id]' do
-      expect { subject }.to change { session[:user_id] }.from(user.id).to(nil)
+      expect { subject }.to change { session[:user_id] }.from(1).to(nil)
     end
 
     it { is_expected.to redirect_to new_session_path }

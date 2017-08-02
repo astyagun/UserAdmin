@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Authentication::Check do
   describe '.call' do
+    subject { described_class.call email: email, password: password }
+
     let(:user) { create :user }
     let(:email) { user.email }
     let(:password) { user.password }
-    subject { described_class.call email: email, password: password }
 
     it { is_expected.to be_success }
 

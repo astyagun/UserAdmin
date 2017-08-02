@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'validity' do
-    let(:user) { build :user }
     subject { user.valid? }
+
+    let(:user) { build :user }
 
     it { is_expected.to be true }
 
@@ -68,6 +69,7 @@ RSpec.describe User, type: :model do
 
       context 'and password_confirmation does not match it' do
         let(:password_confirmation) { '123' }
+
         it { is_expected.to be false }
       end
     end
@@ -75,6 +77,7 @@ RSpec.describe User, type: :model do
     context 'when password is not changed (but some other field is changed)' do
       before { user.small_biography = '123' }
       let(:user) { User.find create(:user).id }
+
       it { is_expected.to be true }
     end
   end
@@ -86,6 +89,7 @@ RSpec.describe User, type: :model do
 
     describe 'admin trait' do
       subject { build :user, :admin }
+
       it { is_expected.to be_valid }
     end
   end

@@ -17,7 +17,6 @@ Rails.application.routes.draw do
 
   get 'home' => 'homes#show'
 
-  Sidekiq::Web.use AuthenticationMiddleware
   Sidekiq::Web.use AuthorizationMiddleware
   mount Sidekiq::Web => '/sidekiq'
 end

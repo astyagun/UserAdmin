@@ -32,10 +32,6 @@ module AuthenticationConcern
     raise LoggedInUserNotFound, 'User saved in session was not found'
   end
 
-  def require_authentication
-    redirect_to new_session_path, alert: t('application.authentication_required') unless user_logged_in?
-  end
-
   def logged_in_redirect_path(user)
     user.admin? ? admin_users_path : home_path
   end

@@ -14,7 +14,7 @@ RSpec.describe Authentication::Check do
       expect(result.user).to eq user
     end
 
-    context 'when there is no user for email provided' do
+    context 'when there is no user with guven email' do
       let(:email) { '123' }
 
       it { is_expected.not_to be_success }

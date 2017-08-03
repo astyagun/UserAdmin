@@ -18,18 +18,19 @@ RSpec.describe AdminMailer, type: :mailer do
       expect(email.to).to eq ['recipient@example.com']
     end
 
-    it 'adds a PDF attachment into email' do
+    it 'adds a PDF attachment into email', :aggregate_failures do
       expect(email.attachments['User Admin - User details.pdf']).to have_attributes(
         content_type: 'application/pdf; filename="User Admin - User details.pdf"',
         filename: 'User Admin - User details.pdf'
       )
+      expect(email.attachments['User Admin - User details.pdf'].body).not_to be_empty
     end
 
     it 'can be delivered' do
       expect { email.deliver_now }.to change(ActionMailer::Base.deliveries, :count).by 1
     end
 
-    it 'can be enqueued' do
+    it 'can be enqueued for delivery' do
       expect { email.deliver_later }.to change(enqueued_jobs, :count).by 1
     end
   end

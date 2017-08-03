@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'admin_mailer/user_details', type: :view do
-  subject :rendered_view do
+  subject :render_view do
     render
     PDF::Inspector::Text.analyze(rendered).strings.join(' ')
   end
@@ -12,9 +12,9 @@ RSpec.describe 'admin_mailer/user_details', type: :view do
 
   it 'renders user attributes and no images', :aggregate_failures do
     %i[id role email full_name small_biography].each do |attribute|
-      expect(rendered_view).to have_content user[attribute]
+      expect(render_view).to have_content user[attribute]
     end
-    expect(rendered_view).to have_content I18n.l(user.birth_date, format: :long)
+    expect(render_view).to have_content I18n.l(user.birth_date, format: :long)
     expect(rendered_images.count).to eq 0
   end
 
@@ -22,7 +22,7 @@ RSpec.describe 'admin_mailer/user_details', type: :view do
     before { user.small_biography = 'Опа' }
 
     it 'renders without errors' do
-      expect(rendered_view).to have_content user.small_biography
+      expect(render_view).to have_content user.small_biography
     end
   end
 
@@ -30,7 +30,7 @@ RSpec.describe 'admin_mailer/user_details', type: :view do
     let(:user) { build_stubbed :user, :with_avatar }
 
     it 'renders an image' do
-      rendered_view
+      render_view
       expect(rendered_images.count).to eq 1
     end
   end

@@ -4,8 +4,10 @@ module AuthenticationConcern
   LoggedInUserNotFound = Class.new StandardError
 
   included do
-    helper_method :user_logged_in?, :current_user
-    rescue_from LoggedInUserNotFound, with: :log_out
+    if self.ancestors.map(&:name).include? 'ActionController::Base'
+      helper_method :user_logged_in?, :current_user
+      rescue_from LoggedInUserNotFound, with: :log_out
+    end
   end
 
   private

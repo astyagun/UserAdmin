@@ -30,6 +30,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
     attach_file 'Avatar',            Rails.root.join('spec', 'files', 'avatar.jpg')
 
     click_on 'Create User'
+    expect(page).to have_content 'User was successfully created'
 
     # Show
     within('h1') { expect(page).to have_content 'Show User #' }
@@ -49,6 +50,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
     click_on 'Update User'
 
     expect(page).to have_content new_biography
+    expect(page).to have_content 'User was successfully updated'
 
     # Index
 

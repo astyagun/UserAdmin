@@ -27,7 +27,7 @@ module AuthenticationConcern
   end
 
   def current_user
-    @current_user ||= User.find session[:user_id]
+    @current_user ||= ::User.find session[:user_id]
   rescue ActiveRecord::RecordNotFound
     raise LoggedInUserNotFound, 'User saved in session was not found'
   end

@@ -11,12 +11,12 @@ class AuthorizationMiddleware
     duplicate = dup # To isolate instance variables between calls
     duplicate.instance_variable_set :@env, environment
 
-    duplicate.send(:authorize) || @app.call(environment)
+    duplicate.send(:redirect_unauthorized) || @app.call(environment)
   end
 
   private
 
-  def authorize
+  def redirect_unauthorized
     require_authentication || require_admin
   end
 end

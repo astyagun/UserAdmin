@@ -10,7 +10,7 @@ gem 'rails', '~> 5.1.2'
 gem 'sidekiq', '~> 5.0'
 
 # Font end
-gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'bootstrap', '~> 4.3.1'
 gem 'bootstrap-datepicker-rails', '~> 1.6'
 gem 'coffee-rails', '~> 4.2'
 gem 'haml-rails', '~> 1.0'

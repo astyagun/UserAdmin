@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Back end
 gem 'bcrypt', '~> 3.1.7'
 gem 'carrierwave', '~> 1.1'
-gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.9'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.2'

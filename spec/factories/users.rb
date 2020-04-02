@@ -8,7 +8,7 @@ FactoryGirl.define do
     birth_date { Faker::Date.birthday 18, 100 }
     small_biography { Faker::Lorem.paragraph }
 
-    trait :admin { role 'admin' }
+    trait(:admin) { role 'admin' }
     trait :with_avatar do
       avatar { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'files', 'avatar.jpg'), 'image/jpg') }
     end

@@ -3,7 +3,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   process resize_to_fit: [200, 200]
 
-  version :thumbnail { process resize_to_fit: [40, 40] }
+  version(:thumbnail) { process resize_to_fit: [40, 40] }
 
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}"

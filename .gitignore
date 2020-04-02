@@ -40,6 +40,7 @@ tags
 /cookbooks
 /custom-cookbooks
 /node_modules
+/vendor/bundle
 
 # Logfiles and tempfiles
 !/*/log/.keep
@@ -59,6 +60,7 @@ tags
 /public/system
 /public/uploads
 /screenshot
+/spec/examples.txt
 /spec/tmp/*
 /tmp/*
 /yarn-error.log

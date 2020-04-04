@@ -1,2 +1,13 @@
 @import 'bootstrap';
 @import 'bootstrap-datepicker';
+
+.required abbr {
+  color: var(--red);
+}
+
+@include media-breakpoint-up('sm') {
+  .col-sm-fixed-width {
+    flex: none;
+    width: 420px;
+  }
+}

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  ROLES = %w[user admin]
+  ROLES = %w[user admin].freeze
 
   mount_uploader :avatar, AvatarUploader
 

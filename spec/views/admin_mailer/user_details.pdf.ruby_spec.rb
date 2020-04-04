@@ -7,6 +7,7 @@ RSpec.describe 'admin_mailer/user_details', type: :view do
   end
 
   before { assign :user, user }
+
   let(:user) { build_stubbed :user }
   let(:rendered_images) { PDF::Inspector::XObject.analyze(rendered).page_xobjects.first }
 

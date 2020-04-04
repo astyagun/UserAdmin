@@ -9,7 +9,7 @@ class AdminMailer < ApplicationMailer
 
     mail(
       subject: t('.subject', application_name: application_name, id: user.id),
-      body: ''
+      body:    ''
     )
   end
 end

@@ -17,10 +17,13 @@
 // See which files are available in Bootstrap: https://github.com/twbs/bootstrap-rubygem/blob/latest-release/assets/javascripts/bootstrap-sprockets.js
 //= require bootstrap/util
 //= require bootstrap/alert
+//= require popper
+//= require bootstrap/tooltip
 //
 //= require bootstrap-datepicker/core
 //= require_tree .
 
+// Registration page
 $(document).on('turbolinks:load', function() {
   $('.form-group.user_birth_date input').datepicker({
     'format': 'yyyy-mm-dd',
@@ -29,4 +32,6 @@ $(document).on('turbolinks:load', function() {
     'endDate': (new Date().getFullYear() - 5) + '-12-31',
     'startView': 'decades'
   });
+
+  $('abbr[title]').tooltip();
 });

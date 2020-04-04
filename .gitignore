@@ -1,65 +1,33 @@
 # Local configuration
-/*/.env
-/*/config/database.yml
-/*/config/secrets.yml.key
-/*/config/settings.local.yml
 /.env
 /.haml-lint.yml
 /.overcommit.yml
 /.reek
 /.rubocop.yml
 /.yardoc
-/coffeelint.json
-/config/database.yml
 /config/secrets.yml.key
 /config/settings.local.yml
 
 # IDE projects
 *.swo
 *.swp
-/*.sublime-project
-/*.sublime-workspace
-/.gems_path
-/.gemtags
-/.idea
-/.project
-tags
 
 # Local Ruby environment
-/*/.bundle
-/*/.docker-sync
-/*/node_modules
 /.bundle
 /.docker-sync
-/.ruby-gemset
-/.ruby-version
-/.vagrant
-/Cheffile
-/Cheffile.lock
-/Vagrantfile
-/cookbooks
-/custom-cookbooks
 /node_modules
 /vendor/bundle
 
 # Logfiles and tempfiles
-!/*/log/.keep
-!/*/tmp/.keep
 !/log/.keep
 !/tmp/.keep
 .byebug_history
-/*/log/*
-/*/public/uploads
-/*/spec/tmp/*
-/*/tmp/*
-/*/yarn-error.log
 /.sass-cache
 /coverage
 /log/*
 /public/image_uploads
 /public/system
 /public/uploads
-/screenshot
 /spec/examples.txt
 /spec/tmp/*
 /tmp/*

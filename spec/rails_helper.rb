@@ -1,6 +1,6 @@
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 
@@ -11,9 +11,9 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.filter_rails_from_backtrace!
-  config.include FactoryGirl::Syntax::Methods
-  config.include FeatureAuthenticationHelper, type: :feature
+  config.include FactoryBot::Syntax::Methods
+  config.include FeatureAuthenticationHelper, type: :system
   config.include ControllerAuthenticationHelper, type: :controller
-  config.include ActiveJob::TestHelper, type: :feature
+  config.include ActiveJob::TestHelper, type: :system
   config.include CarrierWave::Test::Matchers, type: :uploader
 end

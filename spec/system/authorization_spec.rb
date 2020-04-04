@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-# rubocop:disable RSpec/MultipleExpectations
-RSpec.describe 'Authorization', type: :feature do
+RSpec.describe 'Authorization', type: :system do
   describe 'visiting admin section' do
     subject(:visit_admin_section) { visit admin_root_path }
 
@@ -80,7 +79,7 @@ RSpec.describe 'Authorization', type: :feature do
       end
     end
 
-    context 'when user is not logged in' do
+    context 'when user is logged in' do
       before { log_in create(:user) }
 
       it 'redirects to log in page and renders a flash message' do

@@ -16,5 +16,5 @@ if ENV['ADMIN_EMAIL'].present? && ENV['ADMIN_PASSWORD'].present?
     puts user.errors.full_messages.join(', ')
   end
 else
-  puts 'Skipping Admin User creation due to missing credentials'
+  puts 'Skipping Admin User creation due to missing credentials in environment variables: ADMIN_EMAIL, ADMIN_PASSWORD'
 end

@@ -1,14 +1,13 @@
 require 'rails_helper'
 
-# rubocop:disable RSpec/ExampleLength, RSpec/MultipleExpectations
-RSpec.describe 'Admin Dashboard', type: :feature do
+RSpec.describe 'Admin Dashboard', type: :system do
   let(:admin) { create :user, :admin }
 
   it 'allows listing, viewing, editing and deleting users' do
     log_in admin
 
     # Index
-    expect(page.current_path).to eq admin_users_path
+    expect(page).to have_current_path admin_users_path, ignore_query: true
     within('h1') { expect(page).to have_content 'Users' }
 
     expect(page).to have_css "img[src*='thumbnail_avatar_default']"
@@ -39,7 +38,7 @@ RSpec.describe 'Admin Dashboard', type: :feature do
     expect(page).to have_content user_attributes[:role]
     expect(page).to have_content user_attributes[:email]
     expect(page).to have_content user_attributes[:full_name]
-    expect(page).to have_content user_attributes[:birth_date]
+    expect(page).to have_content user_attributes[:birth_date].to_s :long
     expect(page).to have_content user_attributes[:small_biography]
 
     # Edit

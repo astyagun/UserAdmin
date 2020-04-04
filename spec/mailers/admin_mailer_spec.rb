@@ -21,7 +21,7 @@ RSpec.describe AdminMailer, type: :mailer do
     it 'adds a PDF attachment into email', :aggregate_failures do
       expect(email.attachments['User Admin - User details.pdf']).to have_attributes(
         content_type: 'application/pdf; filename="User Admin - User details.pdf"',
-        filename: 'User Admin - User details.pdf'
+        filename:     'User Admin - User details.pdf'
       )
       expect(email.attachments['User Admin - User details.pdf'].body).not_to be_empty
     end

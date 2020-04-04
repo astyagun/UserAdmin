@@ -34,7 +34,7 @@ Prawn::Document.new do |pdf| # rubocop:disable Metrics/BlockLength
     pdf.text User.human_attribute_name(:avatar), style: :bold
     pdf.image(
       @user.avatar.path,
-      at: [values_offset, pdf.cursor + line_height],
+      at:  [values_offset, pdf.cursor + line_height],
       fit: [avatar_size, avatar_size]
     )
     pdf.move_down avatar_size

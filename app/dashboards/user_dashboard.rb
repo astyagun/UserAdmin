@@ -8,19 +8,19 @@ class UserDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    id: Field::Number,
-    role: Field::Select.with_options(
+    id:                    Field::Number,
+    role:                  Field::Select.with_options(
       collection: User::ROLES
     ),
-    email: Field::String,
-    password: Field::String,
+    email:                 Field::String,
+    password:              Field::String,
     password_confirmation: Field::String,
-    full_name: Field::String,
-    birth_date: Field::DateTime,
-    small_biography: Field::Text,
-    avatar: CarrierwaveField,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    full_name:             Field::String,
+    birth_date:            Field::Date.with_options(format: :long),
+    small_biography:       Field::Text,
+    avatar:                CarrierwaveField,
+    created_at:            Field::DateTime,
+    updated_at:            Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -63,6 +63,18 @@ class UserDashboard < Administrate::BaseDashboard
     small_biography
     avatar
   ].freeze
+
+  # COLLECTION_FILTERS
+  # a hash that defines filters that can be used while searching via the search
+  # field of the dashboard.
+  #
+  # For example to add an option to search for open resources by typing "open:"
+  # in the search field:
+  #
+  #   COLLECTION_FILTERS = {
+  #     open: ->(resources) { resources.where(open: true) }
+  #   }.freeze
+  COLLECTION_FILTERS = {}.freeze
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.

@@ -11,12 +11,13 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = render 'header'
-    .row
-      .col-sm-10.mx-auto.mt-2
-        = render 'flash_messages'
-    .content
-      .row
-        .col-sm-8.mx-auto.mt-4
-          = yield
-      .row.mt-4
+    %header
+      = render 'header'
+    %main
+      %section.row
+        .col-10.col-sm-fixed-width.mx-auto
+          .mt-2= render 'flash_messages'
+      .container
+        .row
+          .col-10.col-sm-fixed-width.mx-auto
+            .mt-4.mb-4= yield

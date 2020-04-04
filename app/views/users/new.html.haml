@@ -1,15 +1,13 @@
 %h1= t('.title')
 
-.col-sm-8.mx-auto
-  = simple_form_for @user, html: {class: 'mt-4'} do |f|
-    = f.error_notification
-    = f.input :email
-    = f.input :password, required: true
-    = f.input :password_confirmation, required: true
-    = f.input :full_name
-    = f.input :birth_date, as: :string
-    = f.input :small_biography
-    = f.input :avatar, wrapper: :horizontal_file_input
-    .row.form-group
-      .col-sm-3
-      = f.button :submit, t('.submit'), class: 'ml-3'
+= simple_form_for @user, html: {class: 'mt-4'} do |f|
+  = f.error_notification
+  = f.input :email
+  = f.input :password, required: true
+  = f.input :password_confirmation, required: true
+  = f.input :full_name
+  = f.input :birth_date, as: :string
+  = f.input :small_biography
+  = f.input :avatar, wrapper: :horizontal_file
+  .mt-4
+    = f.button :submit, t('.submit'), class: 'btn-primary'

@@ -8,12 +8,13 @@ RSpec.describe SessionsController, type: :controller do
 
     context 'when user is already logged in' do
       before { log_in user }
+
       let(:role) { 'user' }
       let(:user) { create :user, role: role }
 
       it { is_expected.to redirect_to home_path }
 
-      context 'and user role is admin' do # rubocop:disable RSpec/NestedGroups
+      context 'and user role is admin' do
         let(:role) { 'admin' }
 
         it { is_expected.to redirect_to admin_users_path }
@@ -30,7 +31,7 @@ RSpec.describe SessionsController, type: :controller do
       it { is_expected.to redirect_to new_session_path }
 
       it 'sets flash message' do
-        expect { controller_action }.to change { flash.notice }.from(nil).to('Logged out successfully')
+        expect { controller_action }.to change(flash, :notice).from(nil).to('Logged out successfully')
       end
     end
   end
@@ -39,6 +40,7 @@ RSpec.describe SessionsController, type: :controller do
     subject(:controller_action) { post :create, params: params }
 
     before { allow(Authentication::Check).to receive(:call).and_return(authentication_check_result) }
+
     let :authentication_check_result do
       double success?: true, user: user # rubocop:disable RSpec/VerifiedDoubles
     end
@@ -51,7 +53,7 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     it 'sets flash notice message' do
-      expect { controller_action }.to change { flash.notice }.from(nil).to('Logged in successfully')
+      expect { controller_action }.to change(flash, :notice).from(nil).to('Logged in successfully')
     end
 
     it 'redirects to admin dashboard' do
@@ -66,7 +68,7 @@ RSpec.describe SessionsController, type: :controller do
       end
 
       it 'sets flash notice message' do
-        expect { controller_action }.to change { flash.notice }.from(nil).to('Logged in successfully')
+        expect { controller_action }.to change(flash, :notice).from(nil).to('Logged in successfully')
       end
 
       it 'redirects to admin dashboard' do
@@ -103,7 +105,7 @@ RSpec.describe SessionsController, type: :controller do
     it { is_expected.to redirect_to new_session_path }
 
     it 'sets flash message' do
-      expect { controller_action }.to change { flash.notice }.from(nil).to('Logged out successfully')
+      expect { controller_action }.to change(flash, :notice).from(nil).to('Logged out successfully')
     end
 
     context 'when user is not logged in' do
@@ -116,7 +118,7 @@ RSpec.describe SessionsController, type: :controller do
       it { is_expected.to redirect_to new_session_path }
 
       it 'sets flash message' do
-        expect { controller_action }.to change { flash.notice }.from(nil).to('Logged out successfully')
+        expect { controller_action }.to change(flash, :notice).from(nil).to('Logged out successfully')
       end
     end
   end

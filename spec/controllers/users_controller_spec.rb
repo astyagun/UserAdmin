@@ -16,12 +16,13 @@ RSpec.describe UsersController, type: :controller do
     subject(:controller_action) { post :create, params: {user: user_attributes} }
 
     before { allow(register_user_interactor).to receive(:call).and_return(registration_result) }
+
     let(:register_user_interactor) { class_double(Authentication::RegisterUser).as_stubbed_const }
     let(:registration_result) { instance_double Interactor::Context, success?: true }
     let(:user_attributes) { attributes_for :user, :admin }
 
     it 'sets flash notice' do
-      expect { controller_action }.to change { flash.notice }.from(nil).to('Registration was successful')
+      expect { controller_action }.to change(flash, :notice).from(nil).to('Registration was successful')
     end
 
     it { is_expected.to redirect_to new_session_path }
@@ -40,8 +41,8 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it 'sets immediate flash alert' do
-        expect { controller_action }.to change { flash.now[:alert] }.
-          from(nil).to('Error performing registration')
+        expect { controller_action }.to change { flash.now[:alert] }
+          .from(nil).to('Error performing registration')
       end
 
       it { is_expected.to render_template :new }

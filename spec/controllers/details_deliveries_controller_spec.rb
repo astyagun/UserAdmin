@@ -9,6 +9,7 @@ RSpec.describe DetailsDeliveriesController, type: :controller do
       allow(message_delivery).to receive :deliver_later
       log_in user
     end
+
     let(:admin_mailer) { class_double('AdminMailer').as_stubbed_const }
     let(:message_delivery) { instance_double ActionMailer::MessageDelivery }
     let(:role) { 'admin' }
@@ -22,8 +23,8 @@ RSpec.describe DetailsDeliveriesController, type: :controller do
     end
 
     it 'sets flash notice' do
-      expect { controller_action }.to change { flash.notice }.
-        from(nil).to('Email delivery was scheduled successfully')
+      expect { controller_action }.to change(flash, :notice)
+        .from(nil).to('Email delivery was scheduled successfully')
     end
 
     it { is_expected.to redirect_to admin_user_path inspected_user }
@@ -34,7 +35,7 @@ RSpec.describe DetailsDeliveriesController, type: :controller do
       it { is_expected.to redirect_to new_session_path }
 
       it 'sets flash alert message' do
-        expect { controller_action }.to change { flash.alert }.from(nil).to('Please log in first')
+        expect { controller_action }.to change(flash, :alert).from(nil).to('Please log in first')
       end
     end
 
@@ -44,8 +45,8 @@ RSpec.describe DetailsDeliveriesController, type: :controller do
       it { is_expected.to redirect_to root_path }
 
       it 'sets flash alert message' do
-        expect { controller_action }.to change { flash.alert }.
-          from(nil).to('Please log in as administrator to access that page')
+        expect { controller_action }.to change(flash, :alert)
+          .from(nil).to('Please log in as administrator to access that page')
       end
     end
 

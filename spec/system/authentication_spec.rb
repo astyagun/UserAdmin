@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-# rubocop:disable RSpec/ExampleLength, RSpec/MultipleExpectations
-RSpec.describe 'Authentication', type: :feature do
+RSpec.describe 'Authentication', type: :system do
   describe 'registration' do
     subject :register do
       visit root_path
@@ -15,7 +14,7 @@ RSpec.describe 'Authentication', type: :feature do
       fill_in 'Small biography', with: user_attributes[:small_biography]
       attach_file 'Avatar', Rails.root.join('spec', 'files', 'avatar.jpg')
 
-      within('.content') { click_on 'Register' }
+      within('.container') { click_on 'Register' }
     end
 
     let(:user_attributes) { attributes_for :user }
@@ -69,7 +68,7 @@ RSpec.describe 'Authentication', type: :feature do
         visit new_session_path
         fill_in 'Email', with: user.email
         fill_in 'Password', with: user.password
-        within('.content') { click_on 'Log in' }
+        within('.container') { click_on 'Log in' }
 
         expect(page).to have_content 'Logged in successfully'
         expect(page).to have_content 'Welcome'
@@ -80,12 +79,12 @@ RSpec.describe 'Authentication', type: :feature do
         within('h1') { expect(page).to have_content 'Log in' }
       end
 
-      context 'and incorrect credentials are entered' do # rubocop:disable RSpec/NestedGroups
+      context 'and incorrect credentials are entered' do
         it 'displays error message' do
           visit new_session_path
           fill_in 'Email', with: user.email + '123'
           fill_in 'Password', with: user.password
-          within('.content') { click_on 'Log in' }
+          within('.container') { click_on 'Log in' }
 
           expect(page).to have_content 'Incorrect email or password'
         end

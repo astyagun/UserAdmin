@@ -12,7 +12,7 @@ FactoryBot.define do
       role { 'admin' }
     end
     trait :with_avatar do
-      avatar { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'files', 'avatar.jpg'), 'image/jpg') }
+      avatar { Rack::Test::UploadedFile.new(Rails.root.join('spec/files/avatar.jpg'), 'image/jpg') }
     end
   end
 end

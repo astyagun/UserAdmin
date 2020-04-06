@@ -60,19 +60,19 @@ RSpec.describe User, type: :model do
 
       it { is_expected.to be true }
 
-      context 'to nil' do
+      context 'when changed to nil' do
+        let(:password) { nil }
+
+        it { is_expected.to be false }
+      end
+
+      context 'when changed to an empty string' do
         let(:password) { '' }
 
         it { is_expected.to be false }
       end
 
-      context 'to an empty string' do
-        let(:password) { '' }
-
-        it { is_expected.to be false }
-      end
-
-      context 'to a string 7 characters long' do
+      context 'when changed to a string 7 characters long' do
         let(:password) { '1234567' }
 
         it { is_expected.to be false }

@@ -26,7 +26,7 @@ RSpec.describe 'Admin Dashboard', type: :system do
     fill_in 'Full name',             with: user_attributes[:full_name]
     fill_in 'Birth date',            with: user_attributes[:birth_date]
     fill_in 'Small biography',       with: user_attributes[:small_biography]
-    attach_file 'Avatar',            Rails.root.join('spec', 'files', 'avatar.jpg')
+    attach_file 'Avatar',            Rails.root.join('spec/files/avatar.jpg')
 
     click_on 'Create User'
     expect(page).to have_content 'User was successfully created'

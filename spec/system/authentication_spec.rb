@@ -12,7 +12,7 @@ RSpec.describe 'Authentication', type: :system do
       fill_in 'Full name', with: user_attributes[:full_name]
       fill_in 'Birth date', with: user_attributes[:birth_date]
       fill_in 'Small biography', with: user_attributes[:small_biography]
-      attach_file 'Avatar', Rails.root.join('spec', 'files', 'avatar.jpg')
+      attach_file 'Avatar', Rails.root.join('spec/files/avatar.jpg')
 
       within('.container') { click_on 'Register' }
     end

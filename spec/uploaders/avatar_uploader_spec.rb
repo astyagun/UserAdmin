@@ -4,7 +4,7 @@ require 'carrierwave/test/matchers'
 RSpec.describe AvatarUploader, type: :uploader do
   let(:user) { build_stubbed :user }
   let(:instance) { described_class.new(user, :avatar) }
-  let(:path_to_file) { Rails.root.join 'spec', 'files', 'avatar.jpg' }
+  let(:path_to_file) { Rails.root.join 'spec/files/avatar.jpg' }
 
   before do
     described_class.enable_processing = true

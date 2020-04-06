@@ -18,3 +18,11 @@ if ENV['ADMIN_EMAIL'].present? && ENV['ADMIN_PASSWORD'].present?
 else
   puts 'Skipping Admin User creation due to missing credentials in environment variables: ADMIN_EMAIL, ADMIN_PASSWORD'
 end
+
+TARGET_USER_COUNT = 10
+users_created_length = [TARGET_USER_COUNT, User.where(role: 'user').count]
+  .min
+  .upto(TARGET_USER_COUNT - 1)
+  .map { FactoryBot.create :user }
+  .length
+puts "Number of users created: #{users_created_length}"

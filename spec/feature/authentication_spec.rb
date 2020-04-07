@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Authentication', type: :system do
+RSpec.describe 'Authentication', type: :feature do
   describe 'registration' do
     subject :register do
       visit root_path

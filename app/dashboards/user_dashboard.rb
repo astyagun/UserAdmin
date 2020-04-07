@@ -9,12 +9,10 @@ class UserDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id:                    Field::Number,
-    role:                  Field::Select.with_options(
-      collection: User::ROLES
-    ),
+    role:                  Field::Select.with_options(collection: User::ROLES),
     email:                 Field::String,
-    password:              Field::String,
-    password_confirmation: Field::String,
+    password:              Field::String.with_options(searchable: false),
+    password_confirmation: Field::String.with_options(searchable: false),
     full_name:             Field::String,
     birth_date:            Field::Date.with_options(format: :long),
     small_biography:       Field::Text,

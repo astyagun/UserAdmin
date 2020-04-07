@@ -1,12 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Dashboard', type: :system do
+RSpec.describe 'Admin Dashboard', type: :feature do
   let(:admin) { create :user, :admin }
 
-  it 'allows listing, viewing, editing and deleting users' do
+  it 'allows listing, searching, viewing, editing and deleting users' do
     log_in admin
 
     # Index
+
     expect(page).to have_current_path admin_users_path, ignore_query: true
     within('h1') { expect(page).to have_content 'Users' }
 
@@ -16,6 +17,7 @@ RSpec.describe 'Admin Dashboard', type: :system do
     expect(page).to have_content admin.full_name
 
     # Create
+
     user_attributes = attributes_for :user
     click_on 'New user'
 
@@ -32,6 +34,7 @@ RSpec.describe 'Admin Dashboard', type: :system do
     expect(page).to have_content 'User was successfully created'
 
     # Show
+
     within('h1') { expect(page).to have_content 'Show User #' }
     expect(page).to have_css "img[src$='avatar.jpg']"
     expect(page).to have_content User.last.id
@@ -42,6 +45,7 @@ RSpec.describe 'Admin Dashboard', type: :system do
     expect(page).to have_content user_attributes[:small_biography]
 
     # Edit
+
     click_on 'Edit User #'
 
     new_biography = "#{user_attributes[:small_biography]} True story."
@@ -58,6 +62,22 @@ RSpec.describe 'Admin Dashboard', type: :system do
     expect(page).to have_content user_attributes[:role]
     expect(page).to have_content user_attributes[:email]
     expect(page).to have_content user_attributes[:full_name]
+
+    # Search
+
+    fill_in 'Search Users', with: user_attributes[:email]
+    search_form = find 'form.search'
+    class << search_form
+      def submit
+        Capybara::RackTest::Form.new(driver, native).submit({})
+      end
+    end
+    search_form.submit
+
+    expect(page).to have_content user_attributes[:email]
+    expect(page).to have_content user_attributes[:full_name]
+    expect(page).not_to have_content admin.email
+    expect(page).not_to have_content admin.full_name
   end
 
   it 'allows to send a PDF with user details' do

@@ -12,8 +12,8 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.filter_rails_from_backtrace!
   config.include FactoryBot::Syntax::Methods
-  config.include FeatureAuthenticationHelper, type: :system
+  config.include FeatureAuthenticationHelper, type: :feature
   config.include ControllerAuthenticationHelper, type: :controller
-  config.include ActiveJob::TestHelper, type: :system
+  config.include ActiveJob::TestHelper, type: :feature
   config.include CarrierWave::Test::Matchers, type: :uploader
 end

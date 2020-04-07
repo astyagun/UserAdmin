@@ -354,7 +354,6 @@ DEPENDENCIES
   mini_magick
   pdf-inspector
   pg
-  popper_js
   prawn
   pry-byebug
   pry-rails

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Authorization', type: :system do
+RSpec.describe 'Authorization', type: :feature do
   describe 'visiting admin section' do
     subject(:visit_admin_section) { visit admin_root_path }
 

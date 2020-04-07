@@ -2,13 +2,13 @@
 
 ## Features
 
-* Authentication
+* [Authentication](spec/feature/authentication_spec.rb)
   * Users can enter profile details including
     * Date of birth using date picker
     * Upload profile picture
   * Admin can be created by running the `db:seed` task from the shell and passing it appropriate environment variables: `ADMIN_EMAIL=<email> ADMIN_PASSWORD=<password> rake db:seed`
-* Authorization (users can't visit admin section and Sidekiq web UI, admin can)
-* Admin can
+* [Authorization](spec/feature/authorization_spec.rb) (users can't visit admin section and Sidekiq web UI, admin can)
+* [Admin can](spec/feature/admin_dashboard_spec.rb)
   * List, view, destroy, edit and create normal users
   * Send PDF with selected user's details by Email. Destination Email address is set in secrets file using:
 

@@ -1,3 +1,3 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: Rails.application.secrets.smtp[:from]
+  default from: 'no-reply-user_admin@example.com'
 end

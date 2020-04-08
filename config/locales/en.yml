@@ -8,6 +8,8 @@ en:
       log_out: Log out
     authentication_required: Please log in first
     admin_required: Please log in as administrator to access that page
+  attributes:
+    id: ID
   users:
     new:
       title: Register

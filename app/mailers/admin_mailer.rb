@@ -1,5 +1,5 @@
 class AdminMailer < ApplicationMailer
-  default to: Rails.application.secrets.admin_mailer[:to]
+  default to: 'email@example.com'
 
   def user_details(user)
     @user = user

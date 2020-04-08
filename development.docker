@@ -29,8 +29,8 @@ COPY config/docker.vimrc ~/.vimrc
 RUN bundle config set jobs $(nproc --ignore=1)
 ENV EDITOR=vim DISPLAY=:0
 
-# Setup the Solargraph LSP server for code autocompletion and navigation
-RUN gem install solargraph && solargraph download-core
+RUN gem install solargraph mailcatcher && solargraph download-core
+
 # For the "Go to definition" feature: make gems available on the host matchine
 RUN bundle config set path vendor/bundle
 # Allow running bundled gems executables without using `bundle exec`

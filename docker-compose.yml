@@ -41,6 +41,17 @@ services:
       - postgres
       - redis
 
+  mail_catcher:
+    build:
+      context: .
+      dockerfile: development.docker
+    env_file: .docker.env
+    command: mailcatcher --foreground --ip 0.0.0.0
+    volumes:
+      - code:/usr/src/app:nocopy
+    ports:
+      - 1080:1080
+
   postgres:
     image: postgres:12.2
     environment:

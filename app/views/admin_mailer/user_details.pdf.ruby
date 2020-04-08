@@ -43,7 +43,7 @@ Prawn::Document.new do |pdf| # rubocop:disable Metrics/BlockLength
   pdf.text User.human_attribute_name(:id), style: :bold
   pdf.text_box @user.id.to_s, at: [values_offset, pdf.cursor + line_height]
 
-  pdf.text User.human_attribute_name(:rolee), style: :bold
+  pdf.text User.human_attribute_name(:role), style: :bold
   pdf.text_box @user.role, at: [values_offset, pdf.cursor + line_height]
 
   pdf.text User.human_attribute_name(:email), style: :bold

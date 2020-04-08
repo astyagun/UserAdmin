@@ -23,7 +23,7 @@ RSpec.describe DetailsDeliveriesController, type: :controller do
     end
 
     it 'sets flash notice' do
-      expect { controller_action }.to change(flash, :notice)
+      expect { controller_action }.to change { flash.notice }
         .from(nil).to('Email delivery was scheduled successfully')
     end
 
@@ -35,7 +35,7 @@ RSpec.describe DetailsDeliveriesController, type: :controller do
       it { is_expected.to redirect_to new_session_path }
 
       it 'sets flash alert message' do
-        expect { controller_action }.to change(flash, :alert).from(nil).to('Please log in first')
+        expect { controller_action }.to change { flash.alert }.from(nil).to('Please log in first')
       end
     end
 
@@ -45,7 +45,7 @@ RSpec.describe DetailsDeliveriesController, type: :controller do
       it { is_expected.to redirect_to root_path }
 
       it 'sets flash alert message' do
-        expect { controller_action }.to change(flash, :alert)
+        expect { controller_action }.to change { flash.alert }
           .from(nil).to('Please log in as administrator to access that page')
       end
     end

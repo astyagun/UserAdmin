@@ -31,7 +31,7 @@ RSpec.describe SessionsController, type: :controller do
       it { is_expected.to redirect_to new_session_path }
 
       it 'sets flash message' do
-        expect { controller_action }.to change(flash, :notice).from(nil).to('Logged out successfully')
+        expect { controller_action }.to change { flash.notice }.from(nil).to('Logged out successfully')
       end
     end
   end
@@ -53,7 +53,7 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     it 'sets flash notice message' do
-      expect { controller_action }.to change(flash, :notice).from(nil).to('Logged in successfully')
+      expect { controller_action }.to change { flash.notice }.from(nil).to('Logged in successfully')
     end
 
     it 'redirects to admin dashboard' do
@@ -68,7 +68,7 @@ RSpec.describe SessionsController, type: :controller do
       end
 
       it 'sets flash notice message' do
-        expect { controller_action }.to change(flash, :notice).from(nil).to('Logged in successfully')
+        expect { controller_action }.to change { flash.notice }.from(nil).to('Logged in successfully')
       end
 
       it 'redirects to admin dashboard' do
@@ -105,7 +105,7 @@ RSpec.describe SessionsController, type: :controller do
     it { is_expected.to redirect_to new_session_path }
 
     it 'sets flash message' do
-      expect { controller_action }.to change(flash, :notice).from(nil).to('Logged out successfully')
+      expect { controller_action }.to change { flash.notice }.from(nil).to('Logged out successfully')
     end
 
     context 'when user is not logged in' do
@@ -118,7 +118,7 @@ RSpec.describe SessionsController, type: :controller do
       it { is_expected.to redirect_to new_session_path }
 
       it 'sets flash message' do
-        expect { controller_action }.to change(flash, :notice).from(nil).to('Logged out successfully')
+        expect { controller_action }.to change { flash.notice }.from(nil).to('Logged out successfully')
       end
     end
   end

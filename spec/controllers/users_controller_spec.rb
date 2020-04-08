@@ -22,7 +22,7 @@ RSpec.describe UsersController, type: :controller do
     let(:user_attributes) { attributes_for :user, :admin }
 
     it 'sets flash notice' do
-      expect { controller_action }.to change(flash, :notice).from(nil).to('Registration was successful')
+      expect { controller_action }.to change { flash.notice }.from(nil).to('Registration was successful')
     end
 
     it { is_expected.to redirect_to new_session_path }

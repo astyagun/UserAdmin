@@ -13,7 +13,7 @@ if ENV['ADMIN_EMAIL'].present? && ENV['ADMIN_PASSWORD'].present?
   if user.save
     puts 'Admin User created successfully'
   else
-    puts user.errors.full_messages.join(', ')
+    puts "Error creating admin user: #{user.errors.full_messages.join(', ')}"
   end
 else
   puts 'Skipping Admin User creation due to missing credentials in environment variables: ' \
@@ -21,10 +21,11 @@ else
 end
 
 TARGET_USER_COUNT = 10
-users_created_length = [TARGET_USER_COUNT, User.where(role: 'user').count]
+EXISTING_USERS_COUNT = User.where(role: 'user').count
+users_created_length = [TARGET_USER_COUNT, EXISTING_USERS_COUNT]
   .min
   .upto(TARGET_USER_COUNT - 1)
   .map { FactoryBot.create :user }
   .length
-puts "Number of users created: #{users_created_length}"
+puts "Number of non-admin users created: #{users_created_length} (#{EXISTING_USERS_COUNT} was already present in DB)"
 # rubocop:enable Rails/Output

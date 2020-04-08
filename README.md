@@ -15,4 +15,8 @@
 ## Development
 
 * Use the [Docker development environment](DOCKER.LOCAL.md)
-* Run `ADMIN_EMAIL=<email> ADMIN_PASSWORD=<password> rails db:seed` to generate admin user with desired credentials and regular users
+* Run the command below to generate users
+
+  ```sh
+  docker-compose exec -e ADMIN_EMAIL=email@example.com -e ADMIN_PASSWORD=123123123 spring rails db:seed
+  ```

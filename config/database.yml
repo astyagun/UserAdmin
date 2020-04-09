@@ -1,19 +1,18 @@
 ---
-common: &common
+common: &default
   adapter: postgresql
   host: postgres
   password: postgres
   user: postgres
 
 development:
-  <<: *common
+  <<: *default
   database: development
 
 test:
-  <<: *common
+  <<: *default
   database: test
 
 production:
-  <<: *common
+  <<: *default
   database: development
-

@@ -16,8 +16,10 @@
     %main
       %section.row
         .col-10.col-sm-fixed-width.mx-auto
-          .mt-2= render 'flash_messages'
+          .mt-2
+            = render 'flash_messages'
       .container
         .row
           .col-10.col-sm-fixed-width.mx-auto
-            .mt-4.mb-4= yield
+            .my-4
+              = yield

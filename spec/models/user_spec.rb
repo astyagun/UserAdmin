@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
         it { is_expected.to be false }
       end
 
-      context "when ##{field} is and empty string" do
+      context "when ##{field} is an empty string" do
         before { instance[field] = '' }
 
         it { is_expected.to be false }
